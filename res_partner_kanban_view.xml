@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+
+
+
+    <t t-name="web.KanbanView_inheritance" t-inherit="web.KanbanView">
+        <xpath expr="//t[contains(@t-component,'props.Renderer')]" position="before">
+            <div class="p-3 bg-white border custom-kanban-sidebar">
+                <h2>Location</h2>
+                <ul class="list-group " t-foreach="state.locationInfo" t-as="state"  t-key="state.state_id">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input  call-state" t-att-data-state="state.state_id[1] ? state.state_id[1]: 'No State'" t-on-click="(e)=> this.getSearchLocations(e,state)" type="checkbox" t-att-id=" 'state_'+state.state_id[0]" />
+                            <label class="form-check-label"  t-att-for=" 'state_'+state.state_id[0]" t-esc="state.state_id[1] ? state.state_id[1]: 'No State'" />
+                        </div>
+                        <span t-esc="state.state_id_count" class=" text-white badge bg-primary rounded-pill "/>
+                    </li>
+                </ul>
+            </div>
+        </xpath>
+
+        <xpath expr="//Layout" position="attributes">
+            <attribute name="className">model.useSampleModel ? 'o_view_sample_data' : 'd-flex' </attribute>
+        </xpath>
+
+        <xpath expr="//SearchBar" position="attributes">
+            <attribute name="t-on-click">(e)=>this.ifEmptySearch(e)</attribute>
+        </xpath>
+
+    </t>
+
+
+
+
+<!--    <t t-name="web.KanbanView.Buttons.inheritance" t-inherit="web.KanbanView.Buttons">-->
+<!--        <xpath expr="//div" position="inside">-->
+<!--            <button class="btn btn-primary" t-on-click="getOrders">orders</button>-->
+<!--            <button class="btn btn-secondary ms-2">Invoices</button>-->
+<!--            <button class="btn btn-success ms-2" >Meetings</button>-->
+<!--        </xpath>-->
+<!--    </t>-->
+
+
+<!--    <t t-name="web.KanbanView_inheritance" t-inherit="web.KanbanView">-->
+<!--        <xpath expr="//t[contains(@t-component,'props.Renderer')]" position="before">-->
+<!--            <div class="bg-white p-3 custom-kanban-sidebar border">-->
+<!--                <h2>Customer Locations</h2>-->
+<!--                <div class="list-group">-->
+<!--                    <t t-foreach="customerLocations" t-as="cust" t-key="cust.state_id[0]">-->
+<!--                        <a class="list-group-item" t-on-click="()=>  this.selectLocation(cust.state_id)">-->
+<!--                            <span t-esc="cust.state_id[0] ?cust.state_id[1] :'No State' "/>-->
+<!--                            <span class="bg-primary badge ms-2 fw-bold text-white" t-esc="cust.state_id_count"/>-->
+<!--                        </a>-->
+<!--                    </t>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </xpath>-->
+
+<!--        <xpath expr="//Layout" position="attributes">-->
+<!--            <attribute name="className">model.useSampleModel ? 'o_view_sample_data' : ''+ 'd-flex'</attribute>-->
+<!--        </xpath>-->
+<!--    </t>-->
+
+
+
+
+</templates>
